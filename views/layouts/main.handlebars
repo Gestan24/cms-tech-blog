@@ -8,7 +8,7 @@
     <title>CMS Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 
 </head>
 
@@ -22,13 +22,14 @@
 
         <nav class="navbar" role="navigation" aria-label="main navigation">
 
-            <div class="navbar-start">
+            <div class="navbar-start" id="logout">
                 {{#if loggedIn}}
-                <a class="p-3" href="/">Home</a>
+                <a class="p-3" href="/homepage">Home</a>
                 <a class="p-3" href="/dashboard">Dashboard</a>
                 <button class="button is-danger p-3">Logout</button>
-                {{else}}
-                <a class="p-3" href="/login">Login</a>
+               {{else}}
+                <a class="p-3" href="/">Home</a>
+                <a class="p-3" href="/dashboard">Dashboard</a>
                 {{/if}}
             </div>
 
@@ -51,6 +52,9 @@
     {{#if loggedIn}}
     <script src="/javascript/logout.js"></script>
     {{/if}}
+    
+    
+  
 
 </body>
 

@@ -2,7 +2,6 @@ const router = require('express').Router();
 
 const { User, Comment, Post } = require('../../models');
 
-const sequelize = require('../../config/connection');
 
 const withAuth = require('../../utils/auth');
 
@@ -22,8 +21,6 @@ router.get('/', (req, res) => {
             'title',
 
             'created_at',
-
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
 
         ],
 
@@ -119,7 +116,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-router.post('/', withAuth, (req, res) => {
+router.post('/',  (req, res) => {
 
 
     User.create({
@@ -193,7 +190,7 @@ router.post('/login', withAuth, (req, res) => {
 
 });
 
-router.post('/logout', withAuth, (req, res) => {
+router.post('/logout', (req, res) => {
 
     if (req.session.loggedIn) {
 

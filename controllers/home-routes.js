@@ -1,10 +1,9 @@
 const router = require('express').Router();
 
-const sequelize = require('../config/connection');
-
 const { Post, User, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
-router.get('/', (req, res) => {
+router.get('/',  (req, res) => {
 
     console.log(req.session);
 
@@ -14,7 +13,6 @@ router.get('/', (req, res) => {
             'post_url',
             'title',
             'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
         include: [
             {
@@ -32,8 +30,6 @@ router.get('/', (req, res) => {
         ]
     })
         .then(dbPostData => {
-
-            console.log(dbPostData[0]);
 
 
             const posts = dbPostData.map(post => post.get({ plain: true }));
@@ -61,16 +57,20 @@ router.get('/', (req, res) => {
 router.get('/login', (req, res) => {
 
     if (req.session.loggedIn) {
-
         res.redirect('/');
-
         return;
-
     }
 
     res.render('login');
 
 });
+
+router.get('/dashboard', withAuth, (req, res) => {
+
+    res.render('dashboard');
+
+});
+
 
 router.get('/post/:id', (req, res) => {
 
@@ -91,8 +91,6 @@ router.get('/post/:id', (req, res) => {
             'title',
 
             'created_at',
-
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
 
         ],
 
