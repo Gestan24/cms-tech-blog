@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+
+<body>
+
+    <header class="hero is-medium">
+
+        <div class="hero-body">
+            <p class="title is-2">The Tech Blog</p>
+        </div>
+
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+
+            <div class="navbar-start" id="logout">
+                {{#if loggedIn}}
+                <a class="p-3" href="/homepage">Home</a>
+                <a class="p-3" href="/dashboard">Dashboard</a>
+                <button class="button is-danger p-3">Logout</button>
+               {{else}}
+                <a class="p-3" href="/">Home</a>
+                <a class="p-3" href="/dashboard">Dashboard</a>
+                {{/if}}
+            </div>
+
+        </nav>
+
+    </header>
+
+    <main>
+    {{{ body }}}
+    </main>
+    <footer class="fixed-bottom py-3">
+        <div class="content has-text-centered">
+            <p>
+                Come back soon!
+            </p>
+        </div>
+    </footer>
+
+
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
+    
+    
+  
+
+</body>
+
+</html>

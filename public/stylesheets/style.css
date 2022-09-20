@@ -1,0 +1,51 @@
+.hero {
+
+    background-color: rgb(31, 21, 14);
+}
+
+.title {
+
+    color: rgb(151, 207, 179);
+}
+
+a {
+
+    color: rgb(151, 207, 179);
+    ;
+}
+
+footer {
+
+    background-color: rgb(31, 21, 14);
+
+    color: rgb(151, 207, 179);
+
+}
+
+.card-header {
+
+    background-color: rgb(31, 21, 14);
+
+    color: rgb(151, 207, 179);
+}
+
+#submit,
+#login {
+
+    color: rgb(31, 21, 14);
+
+    background-color: rgb(151, 207, 179);
+
+}
+
+.post-list {
+    margin: 0;
+    padding: 0;
+}
+
+.create {
+
+    background-color: rgb(31, 21, 14);
+
+    color: rgb(151, 207, 179);
+}
