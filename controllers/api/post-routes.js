@@ -2,8 +2,6 @@ const router = require('express').Router();
 
 const { Post, User, Comment } = require('../../models');
 
-const sequelize = require('../../config/connection');
-
 const withAuth = require('../../utils/auth');
 
 
@@ -93,26 +91,19 @@ router.get('/:id', (req, res) => {
         ],
 
         include: [
-
             {
-                model: Post,
-
-                attributes: ['id', 'title', 'post_url', 'created_at']
-
+              model: Comment,
+              attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+              include: {
+                model: User,
+                attributes: ['username']
+              }
             },
-
-
             {
-                model: Post,
-
-                attributes: ['title'],
-
-                through: Vote,
-
-
+              model: User,
+              attributes: ['username']
             }
-
-        ]
+          ]
 
     })
         .then(dbPostData => {

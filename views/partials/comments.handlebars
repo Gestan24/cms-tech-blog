@@ -2,21 +2,21 @@
 
     {{#each this}}
 
-    <section class="comment">
+    <div class="card comment">
 
-        <div class="meta">
+        <div class="card-header meta">
 
             {{user.username}} on {{format_date created_at}}
 
         </div>
 
-        <div class="text">
+        <div class="card-body text">
 
             {{comment_text}}
 
         </div>
 
-    </section>
+    </div>
 
     {{/each}}
 

@@ -15,7 +15,7 @@ async function signupFormHandler(event) {
 
         const response = await fetch('/api/users', {
 
-            method: 'post',
+            method: 'POST',
 
             body: JSON.stringify({
 
@@ -32,7 +32,7 @@ async function signupFormHandler(event) {
         // check the response status
         if (response.ok) {
 
-            document.location.replace('/')
+            document.location.replace('/dashboard/')
 
         } else {
 
@@ -54,17 +54,19 @@ async function loginFormHandler(event) {
 
     const password = document.querySelector('#login-password').value.trim();
 
-
+    console.log(email, password);
+    
     if (email && password) {
+
 
         const response = await fetch('/api/users/login', {
 
-            method: 'post',
+            method: 'POST',
 
             body: JSON.stringify({
 
-                email,
-                password
+                email: email,
+                password: password
 
             }),
 
@@ -75,7 +77,7 @@ async function loginFormHandler(event) {
 
         if (response.ok) {
 
-            document.location.replace('/dashboard');
+            document.location.replace('/dashboard/');
 
         } else {
 

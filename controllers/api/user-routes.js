@@ -3,8 +3,6 @@ const router = require('express').Router();
 const { User, Comment, Post } = require('../../models');
 
 
-const withAuth = require('../../utils/auth');
-
 
 router.get('/', (req, res) => {
 
@@ -28,23 +26,11 @@ router.get('/', (req, res) => {
 
     })
 
-        .then(dbUserData => {
-
-            req.session.save(() => {
-
-                req.session.user_id = dbUserData.id;
-
-                req.session.username = dbUserData.username;
-
-                req.session.loggedIn = true;
-
-
-                res.json(dbUserData);
-
-            });
-        })
-
-    
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 
 });
 
@@ -129,7 +115,22 @@ router.post('/',  (req, res) => {
 
     })
 
-        .then(dbUserData => res.json(dbUserData))
+        .then(dbUserData => {
+
+            req.session.save(() => {
+
+              req.session.user_id = dbUserData.id;
+
+              req.session.username = dbUserData.username;
+
+              req.session.loggedIn = true;
+
+          
+              res.json(dbUserData);
+
+            });
+            
+          })
 
         .catch(err => {
 
@@ -141,7 +142,7 @@ router.post('/',  (req, res) => {
 
 });
 
-router.post('/login', withAuth, (req, res) => {
+router.post('/login', (req, res) => {
 
     User.findOne({
 
@@ -210,7 +211,7 @@ router.post('/logout', (req, res) => {
 
 });
 
-router.put('/:id', withAuth, (req, res) => {
+router.put('/:id', (req, res) => {
 
     User.update(req.body, {
 
@@ -249,7 +250,7 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
 
     User.destroy({
 

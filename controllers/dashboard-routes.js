@@ -41,9 +41,9 @@ router.get('/', withAuth, (req, res) => {
         });
 });
 
-router.get('/edit/:id', withAuth, (req, res) => {
+router.get('/edit/:id',  (req, res) => {
 
-    Post.findOne({
+    Post.findBYPk({
 
         where: {
 
@@ -94,39 +94,21 @@ router.get('/edit/:id', withAuth, (req, res) => {
     })
 
     .then(dbPostData => {
-
-        if (!dbPostData) {
-
-            res.status(404).json({ message: 'No post found with this id' });
-
-            return;
-
-        }
-
-
-        
-        const post = dbPostData.get({ plain: true });
-
-
-        
-        res.render('edit-post', {
-
+        if (dbPostData) {
+          const post = dbPostData.get({ plain: true });
+          
+          res.render('edit-post', {
             post,
-
-            loggedIn: req.session.loggedIn
-
-        });
-
-    })
-
-
-    .catch(err => {
-
-        console.log(err);
-
+            loggedIn: true
+          });
+        } else {
+          res.status(404).end();
+        }
+      })
+      .catch(err => {
         res.status(500).json(err);
+      });
 
-    });
 })
 
 

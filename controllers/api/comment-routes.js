@@ -45,7 +45,7 @@ router.post('/', withAuth, (req, res) => {
 
             post_id: req.body.post_id,
 
-            // use the id from the session
+            
             user_id: req.session.user_id
 
         })
@@ -63,6 +63,7 @@ router.post('/', withAuth, (req, res) => {
     }
     
 });
+
 
 router.delete('/:id', withAuth, (req, res) => {
 
