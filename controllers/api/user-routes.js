@@ -6,6 +6,8 @@ const { User, Comment, Post } = require('../../models');
 
 router.get('/', (req, res) => {
 
+    console.log(req.session);
+
     
     User.findAll({
 
@@ -14,7 +16,7 @@ router.get('/', (req, res) => {
 
             'id',
 
-            'post_url',
+            'post_content',
 
             'title',
 
@@ -104,6 +106,8 @@ router.get('/:id', (req, res) => {
 
 router.post('/',  (req, res) => {
 
+    console.log(req.session);
+
 
     User.create({
 
@@ -143,6 +147,9 @@ router.post('/',  (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+
+    console.log(req.session);
+    
 
     User.findOne({
 

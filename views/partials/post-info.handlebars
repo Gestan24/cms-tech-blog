@@ -1,14 +1,14 @@
 <article class="post">
 
     <div class="title">
-
-        <a href="{{post_url}}" target="_blank">{{title}}</a>
-
-        <span>({{format_url post_url}})</span>
-
+        <h1>{{title}}</h1>
     </div>
 
-    <div class="meta">
+    <div class="">
+        <p class="pb-3 mb-3 ml-3">{{post_content}}</p>
+    </div>
+
+    <div class="meta mt-3 border-bottom">
 
           by {{user.username}} on {{format_date created_at}}
 

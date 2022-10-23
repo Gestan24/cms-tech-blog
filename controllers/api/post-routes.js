@@ -9,6 +9,7 @@ const withAuth = require('../../utils/auth');
 router.get('/', (req, res) => {
 
     console.log('======================');
+    console.log(req.session);
 
     Post.findAll({
 
@@ -18,7 +19,7 @@ router.get('/', (req, res) => {
 
             'id',
 
-            'post_url',
+            'post_content',
 
             'title',
 
@@ -82,7 +83,7 @@ router.get('/:id', (req, res) => {
 
             'id',
 
-            'post_url',
+            'post_content',
 
             'title',
 
@@ -132,12 +133,14 @@ router.get('/:id', (req, res) => {
 
 router.post('/', withAuth, (req, res) => {
 
+    console.log(req.session.user_id);
+
     
     Post.create({
 
         title: req.body.title,
 
-        post_url: req.body.post_url,
+        post_content: req.body.post_content,
 
         user_id: req.session.user_id
 

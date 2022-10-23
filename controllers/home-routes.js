@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     Post.findAll({
         attributes: [
             'id',
-            'post_url',
+            'post_content',
             'title',
             'created_at',
         ],
@@ -68,7 +68,7 @@ router.get('/post/:id', (req, res) => {
 
             'id',
 
-            'post_url',
+            'post_content',
 
             'title',
 
@@ -142,6 +142,8 @@ router.get('/post/:id', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+
+    console.log(req.session);
 
     if (req.session.loggedIn) {
         res.redirect('/');
